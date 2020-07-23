@@ -4,7 +4,6 @@
     * [Vue docs](https://vuejs.org/v2/guide/)
     * [Google](https://google.com)
     * [Stackoverflow](https://stackoverflow.com/)
-    * Me
     
 * The project includes vuetify, so feel free to use any components or styling that comes with that library
 
@@ -15,20 +14,14 @@
     * Name (String)
     * Active (Boolean)
     
-2. Dispay the list of user's and show the following information for each:
+2. Display the list of user's and show the following information for each:
     * Name
     * Status checkbox
         * Should be checked if `active` is true
         * Should be unchecked otherwise
 
-3. Add additional row to the bottom for adding new users
-    * Add the new user when the "Save User" button is clicked
-    * The user should default to inactive
+3. Add functionality for adding a new user to the list.  Allow a name to be entered, and chose a default for `user.active` status.
        
-4. Add a checkbox labelled "Show only active users"
-    * When the checkbox is checked, display only the active users
-    * When it is unchecked, display all users
+4. Allow list to be filtered to only active users.
 
-5. Update the text color of the rows based on the user's status
-    * If the user is active, change the font color to green
-    * If the user is not active, change the font color to red
+
