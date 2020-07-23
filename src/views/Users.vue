@@ -85,7 +85,7 @@ export default Vue.extend({
       this.newUserInputVisible = true;
     },
     updateUserStatus({ index, active }: UserStatusUpdateEvent) {
-      const { [index]: user } = this.users;
+      const { [index]: user } = this.visibleUsers;
       if (user) {
         user.active = active;
       }
