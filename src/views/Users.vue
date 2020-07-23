@@ -1,33 +1,42 @@
 <template>
-  <v-card
+  <v-sheet
     max-width="400"
     class="mx-auto"
   >
-    <v-toolbar
-      color="blue-grey darken-4"
-      dark
-    >
-      <v-toolbar-title>Users</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        icon
-        @click="showNewUserInput"
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </v-toolbar>
-    <UsersList
-      :users="users"
-      :new-user-input-visible="newUserInputVisible"
-      @update-user-status="updateUserStatus"
-      @add-user="addUser"
+    <v-switch
+      inset
+      v-model="showActiveOnly"
+      label="Active Only"
     />
-  </v-card>
+
+    <v-card>
+      <v-toolbar
+        color="blue-grey darken-4"
+        dark
+      >
+        <v-toolbar-title>Users</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn
+          icon
+          @click="showNewUserInput"
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <UsersList
+        :users="visibleUsers"
+        :new-user-input-visible="newUserInputVisible"
+        @update-user-status="updateUserStatus"
+        @add-user="addUser"
+      />
+    </v-card>
+  </v-sheet>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import UsersList from '@/components/UsersList.vue';
+import { User } from '@/types';
 
 interface UserStatusUpdateEvent {
   index: number;
@@ -43,6 +52,7 @@ export default Vue.extend({
 
   data: () => ({
     newUserInputVisible: false,
+    showActiveOnly: false,
     users: [
       { name: 'User 1', active: true },
       { name: 'User 2', active: false },
@@ -51,6 +61,18 @@ export default Vue.extend({
       { name: 'User 5', active: true },
     ],
   }),
+
+  computed: {
+    activeUsers() {
+      const { users } = this;
+      return users.filter(({ active }: User) => active);
+    },
+    visibleUsers() {
+      // eslint-disable-next-line
+      const { activeUsers, showActiveOnly, users } = this as any;
+      return showActiveOnly ? activeUsers : users;
+    },
+  },
 
   methods: {
     addUser(user: string) {
