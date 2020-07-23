@@ -76,7 +76,9 @@ export default Vue.extend({
 
   methods: {
     addUser(user: string) {
-      this.users.push({ name: user, active: true });
+      if (user) {
+        this.users.push({ name: user, active: true });
+      }
       this.newUserInputVisible = false;
     },
     showNewUserInput() {
