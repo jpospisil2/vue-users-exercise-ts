@@ -26,7 +26,7 @@
       </div>
     </v-app-bar>
 
-    <v-main id="app-content">
+    <v-main>
       <router-view />
     </v-main>
   </v-app>
